@@ -36,7 +36,7 @@ class SHACLModule(RDFModule):
                 try:
                     schema = self.loader.loads(self.prefix + params.cell)
                     if params.label is not None and schema is not None:
-                        store["shapes_graph"][params.label] = schema
+                        store["rdfshapes"][params.label] = schema
                     self.log("Shape successfully parsed.")
                 except Exception as e:
                     self.log(f"Error during shape parse:\n{str(e)}")
@@ -47,8 +47,8 @@ class SHACLModule(RDFModule):
                 if params.label in store["shapes_graph"]:
                     if params.graph in store["data_graph"]:
                         result = self.evaluate(
-                            store["data_graph"][params.graph],
-                            store["shapes_graph"][params.label],
+                            store["rdfgraphs"][params.graph],
+                            store["rdfshapes"][params.label],
                             data_graph_format,
                             shacl_graph_format, 
                             inference,
