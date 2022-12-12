@@ -1,10 +1,6 @@
 from pyshex.utils.schema_loader import SchemaLoader
 from .rdf_module import RDFModule
-
 from pyshacl import validate
-from rdflib import Graph
-
-import pyshacl
 
 class SHACLModule(RDFModule):
     def __init__(self, name, parser, logger, description, displayname):
