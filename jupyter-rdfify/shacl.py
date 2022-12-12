@@ -1,22 +1,10 @@
 from pyshex.utils.schema_loader import SchemaLoader
-from pyshex import ShExEvaluator
 from .rdf_module import RDFModule
 
-from pyshacl import Validator, validate
+from pyshacl import validate
 from rdflib import Graph
 
 import pyshacl
-
-results = pyshacl.validate(
-    data_graph=g2,
-    shacl_graph=g1,
-    data_graph_format="turtle",
-    shacl_graph_format="turtle",
-    inference="rdfs",
-    debug=True,
-    serialize_report_graph="turtle",
-    )
-
 
 class SHACLModule(RDFModule):
     def __init__(self, name, parser, logger, description, displayname):
