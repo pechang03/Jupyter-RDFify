@@ -6,9 +6,9 @@ with open("README.md", "r") as fh:
 setuptools.setup(
     name="jupyter-rdfify",
     version="1.0.2",
-    author="Lars Pieschel",
+    author="Lars Pieschel & Md. Rezaul Karim",
     author_email="lars.pieschel@rwth-aachen.de",
-    description="IPython Extension for semantic web technology support (Turtle, SPARQL, ShEx, etc.)",
+    description="IPython Extension for semantic web technology support (Turtle, SPARQL, ShEx, SHACL, etc.)",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/SemWebNotebooks/Jupyter-RDFify",
@@ -20,6 +20,7 @@ setuptools.setup(
         "sparqlwrapper>=1.8.5",
         "sparqlslurper~=0.4",
         "PyShEx",
+        "pyshacl",
         "owlrl"
     ],
     classifiers=[
