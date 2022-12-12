@@ -1,12 +1,12 @@
-__version__ = '1.0.4'
+__version__ = '1.0.2'
 
 from IPython.display import display_javascript
 from .jupyter_rdf import JupyterRDF
 from .serialization import SerializationModule
 from .sparql import SPARQLModule
 from .shex import ShexModule
+from .shacl import SHACLModule
 from .graph_manager import GraphManagerModule
-
 
 def load_ipython_extension(ipython):
     """Executed when loading the extension. Registers all default modules and the %rdf magic."""
@@ -29,17 +29,12 @@ def load_ipython_extension(ipython):
         "rdfshapes": dict()
     }, True)
     jupyter_rdf = JupyterRDF(ipython)
-    jupyter_rdf.register_module(
-        SerializationModule, "turtle", "Turtle module", "Turtle")
-    jupyter_rdf.register_module(
-        SerializationModule, "n3", "Notation 3 module", "N3")
-    jupyter_rdf.register_module(
-        SerializationModule, "json-ld", "JSON-LD module", "JSON-LD")
-    jupyter_rdf.register_module(
-        SerializationModule, "xml", "XML+RDF module", "XML+RDF")
-    jupyter_rdf.register_module(
-        SPARQLModule, "sparql", "SPARQL module", "SPARQL")
+    jupyter_rdf.register_module(SerializationModule, "turtle", "Turtle module", "Turtle")
+    jupyter_rdf.register_module(SerializationModule, "n3", "Notation 3 module", "N3")
+    jupyter_rdf.register_module(SerializationModule, "json-ld", "JSON-LD module", "JSON-LD")
+    jupyter_rdf.register_module(SerializationModule, "xml", "XML+RDF module", "XML+RDF")
+    jupyter_rdf.register_module(SPARQLModule, "sparql", "SPARQL module", "SPARQL")
     jupyter_rdf.register_module(ShexModule, "shex", "ShEx module", "ShEx")
-    jupyter_rdf.register_module(
-        GraphManagerModule, "graph", "Graph management module", "Graphman")
+    jupyter_rdf.register_module(SHACLModule, "shacl", "SHACL module", "SHACL")
+    jupyter_rdf.register_module(GraphManagerModule, "graph", "Graph management module", "Graphman")
     ipython.register_magics(jupyter_rdf)
