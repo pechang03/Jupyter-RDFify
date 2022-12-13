@@ -37,11 +37,11 @@ def draw_graph(g, logger, shorten_uris=True, rename_blank_nodes=True):
             l = p.n3()
         dot.edge(nodes[s.n3()], nodes[o.n3()], label=l)
     logger.out(dot)
-
-def parse_graph(string, logger, fmt):
+    
+def parse_graph(string, logger, fmt="xml"):
     try:
-        return rdflib.Graph().parse(data=string, format=fmt, encoding="utf-8")
-        self.log("Graph successfully parsed!")    
+        return rdflib.Graph().parse(data=string, format=fmt)
+        self.log("Graph successfully parsed!")  
     except Exception as err:
         logger.print(f"Could not parse {fmt} graph:<br>{str(err)}")
         raise StopCellExecution
