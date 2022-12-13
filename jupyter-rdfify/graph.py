@@ -41,7 +41,7 @@ def draw_graph(g, logger, shorten_uris=True, rename_blank_nodes=True):
 def parse_graph(string, logger, fmt):
     try:
         return rdflib.Graph().parse(data=string, format=fmt, encoding="utf-8")
-        self.log("Shape successfully parsed!")    
+        self.log("Graph successfully parsed!")    
     except Exception as err:
         logger.print(f"Could not parse {fmt} graph:<br>{str(err)}")
         raise StopCellExecution
