@@ -24,11 +24,11 @@ class SHACLModule(RDFModule):
         self.prefix = ""
 
     def print_result(self, result):
-        self.log(f"Evaluating shape '{result.start}' on node '{result.focus}'")
+        self.log(f"Evaluating the shape!")
         if result.result:
-            self.logger.print("PASSED!")
+            self.logger.print("Test PASSED!")
         else:
-            self.logger.print(f"FAILED! Reason:\n{result.reason}\n")
+            self.logger.print(f"Test FAILED! Reason:\n{result.reason}\n")
 
     def handle(self, params, store):
         if params.action == "prefix":
@@ -62,8 +62,8 @@ class SHACLModule(RDFModule):
                             self.print_result(r)
                     else:
                         self.log(
-                            f"Found no shapes graph with label '{params.graph}'.")
+                            f"Found no data graph! '{params.graph}'.")
                 else:
-                    self.log(f"Found no shapes graph with label '{params.label}'.")
+                    self.log(f"Found no shapes graph! '{params.shape}'.")
             else:
-                self.log("A shapes graph and a data graph are required for the validation.")
+                self.log("A shapes graph and a data graph are required for the validation!")
