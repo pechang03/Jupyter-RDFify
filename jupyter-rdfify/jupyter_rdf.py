@@ -1,15 +1,11 @@
-from IPython.core.magic import (
-    Magics, magics_class, line_cell_magic, needs_local_scope)
+from IPython.core.magic import (Magics, magics_class, line_cell_magic, needs_local_scope)
 from shlex import split
-
 from .rdf_module import RDFModule
 from .log import RDFLogger
 from .util import MagicParser
 
-
 @magics_class
 class JupyterRDF(Magics):
-
     def __init__(self, shell):
         super(JupyterRDF, self).__init__(shell)
         self.parser = MagicParser("%rdf")
