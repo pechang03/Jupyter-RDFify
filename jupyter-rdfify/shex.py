@@ -2,7 +2,6 @@ from pyshex.utils.schema_loader import SchemaLoader
 from pyshex import ShExEvaluator
 from .rdf_module import RDFModule
 
-
 class ShexModule(RDFModule):
     def __init__(self, name, parser, logger, description, displayname):
         super().__init__(name, parser, logger, description, displayname)
