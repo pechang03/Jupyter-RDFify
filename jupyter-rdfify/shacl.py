@@ -79,7 +79,7 @@ class SHACLModule(RDFModule):
                                     serialize_report_graph = "turtle",
                                 )
                                 conforms, report_graph, report_text = results
-                                self.print_result(conforms) 
+                                self.print_validation_result(conforms) 
                                             
                             except Exception as e:
                                 print("Opps!", str(e), flush=True)
