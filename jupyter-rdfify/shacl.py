@@ -29,8 +29,7 @@ class SHACLModule(RDFModule):
             else:
                 self.log(f"Graph labelled '{label}' not found.")
         else:
-            self.log(
-                "Please specify the label of a graph with parameter --label or -l.")
+            self.log("Please specify the label of a graph with parameter --label or -l.")
             
     def print_result(self, result):
         self.log(f"Evaluating the shape!")
@@ -46,10 +45,14 @@ class SHACLModule(RDFModule):
                 self.log("Prefixes have been stored!")            
 
             elif params.action == "parse":
-                if self.check_label(params.label, store):
-                    parse_graph(store["rdfgraphs"][params.label], self.logger, "ttl")
-                else:
-                    self.log("No cell content to parse.")
+                try:
+                    self.prefix = params.cell + "\n"
+                    code = strip_comments(params.cell)
+                    parse_graph(self.prefix + code, self.logger, self.name)
+                    
+                except Exception as e:
+                    self.log(f"Parse failed:\n{str(e)}")                    
+                    return
                     
             elif params.action == "draw":
                 if self.check_label(params.label, store):
