@@ -7,11 +7,11 @@ setuptools.setup(
     name="jupyter-rdfify",
     version="1.0.2",
     author="Lars Pieschel & Md. Rezaul Karim",
-    author_email="lars.pieschel@rwth-aachen.de",
+    author_email="rezaul.karim@rwth-aachen.de",
     description="IPython Extension for semantic web technology support (Turtle, SPARQL, ShEx, SHACL, etc.)",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/SemWebNotebooks/Jupyter-RDFify",
+    url="https://github.com/AwesomeDeepAI/Jupyter-RDFify",
     packages=setuptools.find_packages(),
     install_requires=[
         "rdflib~=5.0",
