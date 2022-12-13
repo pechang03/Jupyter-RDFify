@@ -1,7 +1,7 @@
 from pyshex.utils.schema_loader import SchemaLoader
 from .rdf_module import RDFModule
 from .graph import draw_graph, parse_graph
-from pyshacl import validate
+import pyshacl
 from .util import strip_comments
 
 class SHACLModule(RDFModule):
@@ -34,7 +34,7 @@ class SHACLModule(RDFModule):
             
     def print_result(self, result):
         self.log(f"Evaluating the shape!")
-        if result.result:
+        if result[0]:
             self.logger.print("Test PASSED!")
         else:
             self.logger.print(f"Test FAILED! Reason:\n{result.reason}\n")
@@ -49,33 +49,35 @@ class SHACLModule(RDFModule):
                 try:
                     self.prefix = params.cell + "\n"
                     code = strip_comments(params.cell)
-                    parse_graph(self.prefix + code, self.logger, self.name)                    
+                    parse_graph(self.prefix + code, self.logger, self.name)            
                 except Exception as e:
                     self.log(f"Parse failed:\n{str(e)}")                    
-                    return
-                    
+                    return 
             elif params.action == "draw":
                 if self.check_label(params.label, store):
                     draw_graph(store["rdfgraphs"][params.label], self.logger)
                     
             elif params.action == "validate":
                 if params.label is not None and params.graph is not None:
-                    if params.label in store["shapes_graph"]:
-                        if params.graph in store["data_graph"]:
-                            result = self.evaluate(
-                                store["rdfsources"][params.shapes_graph],
-                                store["rdfsources"][params.data_graph],
-                                data_graph_format,
-                                shacl_graph_format, 
-                                inference,
-                                debug,
-                                serialize_report_graph,
-                            )
-                            for r in result:
-                                self.print_result(r)
+                    if params.label in store["rdfgraphs"]:
+                        if params.graph in store["rdfgraphs"]:
+                            try:
+                                result = pyshacl.validate(
+                                    data_graph = store["rdfgraphs"][params.graph],
+                                    shacl_graph = store["rdfgraphs"][params.label],
+                                    data_graph_format = "turtle",
+                                    shacl_graph_format = "turtle", 
+                                    inference = "both",
+                                    debug = True,
+                                    serialize_report_graph = "turtle",
+                                )
+                                self.print_result(result) 
+                                            
+                            except Exception as e:
+                                print("upps", str(e), flush=True)
                         else:
                             self.log(f"Found no data graph! '{params.graph}'.")
                     else:
-                        self.log(f"Found no shapes graph! '{params.shape}'.")
+                        self.log(f"Found no shapes graph! '{params.label}'.")
                 else:
                     self.log("A shapes graph and a data graph are required for the validation!")
