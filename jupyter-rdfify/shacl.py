@@ -2,19 +2,17 @@ from pyshex.utils.schema_loader import SchemaLoader
 from .rdf_module import RDFModule
 from .graph import draw_graph, parse_graph
 from pyshacl import validate
-from rdflib import Graph
 
 class SHACLModule(RDFModule):
     def __init__(self, name, parser, logger, description, displayname):
         super().__init__(name, parser, logger, description, displayname)
         self.parser.add_argument(
-            "action", choices=["parse", "validate", "prefix"], help="Action to perform")
+            "action", choices=["parse", "draw", "validate", "prefix"], help="Action to perform")
         self.parser.add_argument(
             "--label", "-l", help="Shape label for referencing")
         self.parser.add_argument(
             "--graph", "-g", help="Graph label for validation")
         
-        self.g_to_parse = Graph()
         self.data_graph_format = "turtle"
         self.shacl_graph_format = "turtle"
         self.graph_fotmat = "ttl"
