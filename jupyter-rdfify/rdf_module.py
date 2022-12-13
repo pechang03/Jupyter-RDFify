@@ -1,6 +1,5 @@
 from abc import ABC, abstractmethod
 
-
 class RDFModule(ABC):
     def __init__(self, name, parser, logger, description="", displayname=None):
         self.name = name
