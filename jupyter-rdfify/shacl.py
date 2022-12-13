@@ -32,6 +32,13 @@ class SHACLModule(RDFModule):
         else:
             self.log("Please specify the label of a graph with parameter --label or -l.")
             
+    def print_validation_result(self, conforms):
+        self.log(f"Evaluating the shape!")
+        if conforms==True:
+            self.logger.print("The data graph has conforms the shapes graph!")
+        else:
+            self.logger.print(f"Test FAILED!")
+    
     def print_result(self, result):
         self.log(f"Evaluating the shape!")
         if result[0]:
@@ -62,7 +69,7 @@ class SHACLModule(RDFModule):
                     if params.label in store["rdfgraphs"]:
                         if params.graph in store["rdfgraphs"]:
                             try:
-                                result = pyshacl.validate(
+                                results = pyshacl.validate(
                                     data_graph = store["rdfgraphs"][params.graph],
                                     shacl_graph = store["rdfgraphs"][params.label],
                                     data_graph_format = "turtle",
@@ -71,10 +78,11 @@ class SHACLModule(RDFModule):
                                     debug = True,
                                     serialize_report_graph = "turtle",
                                 )
-                                self.print_result(result) 
+                                conforms, report_graph, report_text = results
+                                self.print_result(conforms) 
                                             
                             except Exception as e:
-                                print("upps", str(e), flush=True)
+                                print("Opps!", str(e), flush=True)
                         else:
                             self.log(f"Found no data graph! '{params.graph}'.")
                     else:
