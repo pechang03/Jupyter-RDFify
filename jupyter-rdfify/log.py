@@ -1,8 +1,6 @@
 from IPython.display import display, HTML
 
-
 class RDFLogger:
-
     def __init__(self):
         self.verbose = False
 
