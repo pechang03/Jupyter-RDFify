@@ -48,7 +48,7 @@ class SHACLModule(RDFModule):
             elif params.action == "parse":
                 if self.check_label(params.label, store):
                     parse_graph(store["rdfgraphs"][params.label], self.logger, "ttl")
-                 else:
+                else:
                     self.log("No cell content to parse.")
                     
             elif params.action == "draw":
@@ -71,8 +71,7 @@ class SHACLModule(RDFModule):
                             for r in result:
                                 self.print_result(r)
                         else:
-                            self.log(
-                                f"Found no data graph! '{params.graph}'.")
+                            self.log(f"Found no data graph! '{params.graph}'.")
                     else:
                         self.log(f"Found no shapes graph! '{params.shape}'.")
                 else:
