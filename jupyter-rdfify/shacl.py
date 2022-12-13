@@ -9,7 +9,7 @@ class SHACLModule(RDFModule):
         self.parser.add_argument(
             "action", choices=["parse", "validate", "prefix"], help="Action to perform")
         self.parser.add_argument(
-            "--label", "-l", help="Shape label for referencing")
+            "--shape", "-s", help="Shape label for referencing")
         self.parser.add_argument(
             "--graph", "-g", help="Graph label for validation")
         
