@@ -48,8 +48,7 @@ class SHACLModule(RDFModule):
                 try:
                     self.prefix = params.cell + "\n"
                     code = strip_comments(params.cell)
-                    parse_graph(self.prefix + code, self.logger, self.name)
-                    
+                    parse_graph(self.prefix + code, self.logger, self.name)                    
                 except Exception as e:
                     self.log(f"Parse failed:\n{str(e)}")                    
                     return
