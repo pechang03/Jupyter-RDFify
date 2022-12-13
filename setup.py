@@ -20,7 +20,7 @@ setuptools.setup(
         "graphviz==0.20.1",
         "SPARQLWrapper==2.0.0",
         "CFGraph==0.2.1",
-        "chardet==5.1.0:,
+        "chardet==5.1.0",
         "charset-normalizer==2.1.1",
         "sparqlslurper==0.5.1",
         "PyShEx==0.8.1",
