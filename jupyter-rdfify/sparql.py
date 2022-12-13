@@ -1,11 +1,9 @@
 from IPython.display import display, display_pretty
 from SPARQLWrapper import SPARQLWrapper
 from cgi import parse_header
-
 from .rdf_module import RDFModule
 from .graph import parse_graph, draw_graph
 from .table import display_table, html_table
-
 
 formats = ["xml", "json"]
 displays = ["graph", "table", "raw", "none"]
@@ -15,7 +13,6 @@ mime_types = {
     "application/xml": [],
     "application/sparql-results+json": ["table"],
 }
-
 
 class SPARQLModule(RDFModule):
     def __init__(self, name, parser, logger, description, displayname):
@@ -115,7 +112,6 @@ Requested: '{params.format}', Response: '{result._get_responseFormat()}'
                     store["rdfsources"][params.store] = params.cell
                 store["rdfresults"]["last"] = res
                 store["rdfsources"]["last"] = params.cell
-
 
 def select_result_row_iter(result):
     header = []
