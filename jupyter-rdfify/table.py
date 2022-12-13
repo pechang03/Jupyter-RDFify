@@ -3,7 +3,6 @@ import xml.etree.ElementTree as ET
 from .graph import parse_graph
 import json
 
-
 def display_table(body, mime, logger):
     if mime == "application/sparql-results+xml":
         root = ET.fromstring(body)
@@ -16,9 +15,6 @@ def display_table(body, mime, logger):
         logger.display_html(html_table(graph_spo_iterator(g)))
     else:
         logger.print("Could not display table")
-
-
-#
 
 def xml_row_iterator(elem):
     """Iterates a Sparql xml result (http://www.w3.org/2005/sparql-results#) by rows. First result are the column headers."""
@@ -49,7 +45,6 @@ def xml_row_iterator(elem):
                 row.append("Unknown node: {}".format(ET.tostring(n)))
         yield row
 
-
 def json_row_iterator(obj):
     headers = obj["head"]["vars"]
     yield headers
@@ -73,12 +68,10 @@ def json_row_iterator(obj):
                 row.append("")
         yield row
 
-
 def graph_spo_iterator(graph):
     yield ["subject", "predicate", "object"]
     for s, p, o in graph:
         yield [s, p, o]
-
 
 def html_table(row_iter):
     res = "<table>"
@@ -87,13 +80,11 @@ def html_table(row_iter):
         res += html_table_row(row)
     return res + "</table>"
 
-
 def html_table_row(row, header=False):
     res = "<tr>"
     for cell in row:
         res += html_table_cell(cell, header)
     return res + "</tr>"
-
 
 def html_table_cell(cell, header=False):
     if header:
