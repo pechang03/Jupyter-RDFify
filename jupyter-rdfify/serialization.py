@@ -9,7 +9,6 @@ from .util import strip_comments
 displays = ["graph", "table", "raw", "none"]
 formats = ["turtle", "json-ld", "xml", "n3"]
 
-
 class SerializationModule(RDFModule):
     def __init__(self, name, parser, logger, description, displayname):
         super().__init__(name, parser, logger, description, displayname)
