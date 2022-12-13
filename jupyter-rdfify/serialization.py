@@ -60,5 +60,4 @@ class SerializationModule(RDFModule):
                 elif params.display == "table":
                     self.logger.display_html(html_table(graph_spo_iterator(g)))
                 else:
-                    display_pretty(g.serialize(format=params.serialize,
-                                               encoding="utf-8",).decode("utf-8"), raw=True)
+                    display_pretty(g.serialize(format=params.serialize, encoding="utf-8",).decode("utf-8"), raw=True)
