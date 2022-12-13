@@ -63,8 +63,8 @@ class SHACLModule(RDFModule):
                     if params.label in store["shapes_graph"]:
                         if params.graph in store["data_graph"]:
                             result = self.evaluate(
-                                store["rdfgraphs"][params.graph],
-                                store["rdfshapes"][params.label],
+                                store["rdfsources"][params.shapes_graph],
+                                store["rdfsources"][params.data_graph],
                                 data_graph_format,
                                 shacl_graph_format, 
                                 inference,
