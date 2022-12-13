@@ -38,7 +38,7 @@ def draw_graph(g, logger, shorten_uris=True, rename_blank_nodes=True):
         dot.edge(nodes[s.n3()], nodes[o.n3()], label=l)
     logger.out(dot)
     
-def parse_graph(string, logger, fmt="xml"):
+def parse_graph(string, logger, fmt="ttl"):
     try:
         return rdflib.Graph().parse(data=string, format=fmt)
         self.log("Graph successfully parsed!")  
