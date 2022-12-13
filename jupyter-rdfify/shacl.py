@@ -2,7 +2,7 @@ from pyshex.utils.schema_loader import SchemaLoader
 from .rdf_module import RDFModule
 from .graph import draw_graph, parse_graph
 from pyshacl import validate
-from util import strip_comments
+from .util import strip_comments
 
 class SHACLModule(RDFModule):
     def __init__(self, name, parser, logger, description, displayname):
