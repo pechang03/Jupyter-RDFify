@@ -4,7 +4,6 @@ from .graph import draw_graph
 from .rdf_module import RDFModule
 
 class GraphManagerModule(RDFModule):
-
     def __init__(self, name, parser, logger, description, displayname):
         super().__init__(name, parser, logger, description, displayname)
         self.parser.add_argument(
