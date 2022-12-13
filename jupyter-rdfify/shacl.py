@@ -1,6 +1,7 @@
 from pyshex.utils.schema_loader import SchemaLoader
 from .rdf_module import RDFModule
 from pyshacl import validate
+import rdflib
 
 class SHACLModule(RDFModule):
     def __init__(self, name, parser, logger, description, displayname):
@@ -12,9 +13,11 @@ class SHACLModule(RDFModule):
         self.parser.add_argument(
             "--graph", "-g", help="Graph label for validation")
         
-        self.loader = SchemaLoader()
+        self.g_to_parse = rdflib.Graph()
         self.data_graph_format = "turtle"
         self.shacl_graph_format = "turtle"
+        self.graph_fotmat = "ttl"
+        self.graph_encoding = "utf-8"
         self.inference = "rdfs"
         self.debug = True
         self.serialize_report_graph = "turtle"
@@ -30,14 +33,14 @@ class SHACLModule(RDFModule):
     def handle(self, params, store):
         if params.action == "prefix":
             self.prefix = params.cell + "\n"
-            self.log("Stored Prefix.")
+            self.log("Prefixes have been stored!")
+            
         elif params.action == "parse":
             if params.cell is not None:
                 try:
-                    schema = self.loader.loads(self.prefix + params.cell)
-                    if params.label is not None and schema is not None:
-                        store["rdfshapes"][params.label] = schema
-                    self.log("Shape successfully parsed.")
+                    input_graph = params.graph
+                    g_to_parse.parse(data=input_graph, format=self.graph_fotmat, encoding=self.graph_encoding)                    
+                    self.log("Shape successfully parsed!")
                 except Exception as e:
                     self.log(f"Error during shape parse:\n{str(e)}")
             else:
