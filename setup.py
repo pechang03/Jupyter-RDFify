@@ -45,5 +45,5 @@ setuptools.setup(
         "Operating System :: OS Independent",
         "Framework :: IPython",
     ],
-    python_requires='==3.8.16',
+    python_requires='>=3.7',
 )
