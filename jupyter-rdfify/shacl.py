@@ -14,13 +14,6 @@ class SHACLModule(RDFModule):
         self.parser.add_argument(
             "--graph", "-g", help="Graph label for validation")
         
-        self.data_graph_format = "turtle"
-        self.shacl_graph_format = "turtle"
-        self.graph_fotmat = "ttl"
-        self.graph_encoding = "utf-8"
-        self.inference = "rdfs"
-        self.debug = True
-        self.serialize_report_graph = "turtle"
         self.prefix = ""
 
     def check_label(self, label, store):
@@ -35,30 +28,31 @@ class SHACLModule(RDFModule):
     def print_validation_result(self, conforms):
         self.log(f"Evaluating the shape!")
         if conforms==True:
-            self.logger.print("The data graph has conforms the shapes graph!")
+            self.logger.print("The data graph conforms the shapes graph!")
         else:
-            self.logger.print(f"Test FAILED!")
+            self.logger.print(f"Conformance FAILED!")
     
-    def print_result(self, result):
-        self.log(f"Evaluating the shape!")
-        if result[0]:
-            self.logger.print("Test PASSED!")
+    def print_parse_result(self, success):
+        self.log(f"Parsing the graph!")
+        if success==True:
+            self.logger.print("Graph successfully parsed!")
         else:
-            self.logger.print(f"Test FAILED! Reason:\n{result.reason}\n")
+            self.logger.print(f"Parse FAILED! Reason!")
             
     def handle(self, params, store):
         if params.action is not None:
             if params.action == "prefix":
                 self.prefix = params.cell + "\n"
-                self.log("Prefixes have been stored!")            
+                self.log("Prefixes stored!")            
 
             elif params.action == "parse":
+                success = False
                 try:
                     self.prefix = params.cell + "\n"
                     code = strip_comments(params.cell)
-                    self.log(f"Parse failed:\n{str(code)}")
-                    self.log(f"Parse failed:\n{str(self.prefix + code)}")
-                    parse_graph(self.prefix + code, self.logger)            
+                    parse_graph(self.prefix + code, self.logger)    
+                    success = True 
+                    self.print_parse_result(success)
                 except Exception as e:
                     self.log(f"Parse failed:\n{str(e)}")                    
                     return 
