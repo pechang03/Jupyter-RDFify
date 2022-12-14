@@ -16,7 +16,7 @@ setuptools.setup(
     install_requires=[
         "rdflib==6.2.0",
         "jsonasobj==1.3.1",
-        "ipython==8.7.0",
+        "ipython>=7.3",
         "graphviz==0.20.1",
         "SPARQLWrapper==2.0.0",
         "CFGraph==0.2.1",
